@@ -12,6 +12,7 @@ let food = generateFood();
 let gameInterval;
 let score = 0;
 
+
 function startGame() {
     score = 0;
     snake = [{ x: 160, y: 160 }];
@@ -107,4 +108,5 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+//Run function
 startGame();
