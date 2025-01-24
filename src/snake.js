@@ -7,6 +7,7 @@ let direction = { x: gridSize, y: 0 };
 let food = generateFood();
 let gameInterval;
 
+
 function startGame() {
     gameInterval = setInterval(() => {
         clearCanvas();
@@ -73,4 +74,3 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-startGame();
