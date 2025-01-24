@@ -108,4 +108,5 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+//Run function
 startGame();
