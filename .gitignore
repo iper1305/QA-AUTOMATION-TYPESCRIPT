@@ -7,13 +7,14 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules/
+../node_modules/
 dist
 dist-ssr
 *.local
-package-lock.json
+s-eslint-config/package-lock.json
 .prettierrc
 package.json
+eslint.config.mjs
 
 # Editor directories and files
 .vscode/*
