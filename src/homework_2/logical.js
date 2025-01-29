@@ -82,9 +82,9 @@ function logicalOr() {
 function logicalAnd() {
     let result = true;
     for (let i = 0; i < arguments.length; i++) {
-        console.log(`Argument ${i + 1}:`, arguments[i]);  // Логування поточного аргументу
+        console.log(`Argument ${i + 1}:`, arguments[i]);
         result = result && arguments[i];
-        console.log(`Intermediate result after ${i + 1}-th argument:`, result); // Логування проміжного результату
+        console.log(`Intermediate result after ${i + 1}-th argument:`, result);
     }
     return result;
 }
