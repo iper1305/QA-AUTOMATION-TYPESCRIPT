@@ -1,23 +1,23 @@
-let stringNumber = 'number';
-let stringFive = 'five';
-let stringForty = '40';
-let stringTwo = '2';
-let stringFourPx = '4px';
-let stringFoo = 'foo';
-let stringBar = 'bar';
-let integer23 = 23;
-let integer5 = 5;
-let integer3 = 3;
-let integer12 = 12;
-let integer0 = 0;
-let valueNull = null;
-let valueUndefined = undefined;
-let booleanTrue = true;
-let booleanFalse = false;
+const stringNumber = 'number';
+const stringFive = 'five';
+const stringForty = '40';
+const stringTwo = '2';
+const stringFourPx = '4px';
+const stringFoo = 'foo';
+const stringBar = 'bar';
+const integer23 = 23;
+const integer5 = 5;
+const integer3 = 3;
+const integer12 = 12;
+const integer0 = 0;
+const valueNull = null;
+const valueUndefined = undefined;
+const booleanTrue = true;
+const booleanFalse = false;
 
 function addValues(...values) {
     let sum = (typeof values[0] === 'string' ? '' : 0);
-    for (let value of values) {
+    for (const value of values) {
         console.log(`Adding: ${value}`);
         sum += value;
     }

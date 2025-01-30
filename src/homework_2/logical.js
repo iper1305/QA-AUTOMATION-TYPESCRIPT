@@ -1,19 +1,19 @@
-let stringTrueValue = 'true';
-let stringFalseValue = 'false';
-let stringValue40 = '40';
-let stringValue20 = '20';
-let stringValue40_2 = '40';
-let numberValue20 = 20;
-let numberValue5 = 5;
-let numberValue15 = 15;
-let numberValue25 = 25;
-let numberValue25_2 = 25;
-let numberValue1 = 1;
-let numberValue0 = 0;
-let nullValue = null;
-let undefinedValue = undefined;
-let booleanTrueValue = true;
-let booleanFalseValue = false;
+const stringTrueValue = 'true';
+const stringFalseValue = 'false';
+const stringValue40 = '40';
+const stringValue20 = '20';
+const stringValue40_2 = '40';
+const numberValue20 = 20;
+const numberValue5 = 5;
+const numberValue15 = 15;
+const numberValue25 = 25;
+const numberValue25_2 = 25;
+const numberValue1 = 1;
+const numberValue0 = 0;
+const nullValue = null;
+const undefinedValue = undefined;
+const booleanTrueValue = true;
+const booleanFalseValue = false;
 
 function toBoolean(value) {
     return !!value;
@@ -266,7 +266,7 @@ console.log('----------');
 
 // output: true
 console.log('Output 29:', isLessThan(isGreaterThanOrEqual(numberValue20, numberValue25),
-  numberValue15));
+    numberValue15));
 
 console.log('----------');
 

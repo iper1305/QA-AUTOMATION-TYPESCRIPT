@@ -1,29 +1,29 @@
-function categorizeDevice(screenSize, hasTouchscreen, isPortable) {
-    if (screenSize <= 0) {
-        return "Invalid screen size";
+const MOBILE = 'mobile';
+const TABLET = 'tablet';
+const DESKTOP = 'desktop';
+
+function getDeviceMessage(deviceType, deviceName) {
+    let message;
+
+    switch (deviceType) {
+        case MOBILE:
+            message = `You are using a mobile device: ${deviceName}.`;
+            break;
+        case TABLET:
+            message = `You are using a tablet: ${deviceName}.`;
+            break;
+        case DESKTOP:
+            message = `You are using a desktop computer: ${deviceName}.`;
+            break;
+        default:
+            message = `Device type is not recognized for ${deviceName}.`;
+            break;
     }
 
-    switch (true) {
-        case screenSize < 6:
-            return "Smartwatch";
-        case screenSize >= 6 && screenSize < 12:
-            return "Smartphone";
-        case screenSize >= 12 && screenSize < 16:
-            return hasTouchscreen ? "Tablet" : "Small Laptop";
-        case screenSize >= 16 && screenSize < 20:
-            return hasTouchscreen ? (isPortable ? "Convertible Laptop" : "Touchscreen Monitor") : "Large Laptop";
-        default:
-            return isPortable ? "Portable Monitor" : "Desktop";
-    }
+    return message;
 }
 
-console.log(categorizeDevice(3, true, true));
-console.log(categorizeDevice(6, true, true));
-console.log(categorizeDevice(14, true, true));
-console.log(categorizeDevice(14, false, true));
-console.log(categorizeDevice(17, true, true));
-console.log(categorizeDevice(17, true, false));
-console.log(categorizeDevice(17, false, true));
-console.log(categorizeDevice(24, false, false));
-console.log(categorizeDevice(24, true, true));
-console.log(categorizeDevice(-5, false, false));
+console.log(getDeviceMessage(MOBILE, 'iPhone 12'));
+console.log(getDeviceMessage(DESKTOP, 'MacBook Pro'));
+console.log(getDeviceMessage(TABLET, 'iPad Pro 11'));
+console.log(getDeviceMessage("laptop", 'samsung'));
