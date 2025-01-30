@@ -1,14 +1,16 @@
-# MyFirstJSProject
+# QA-AUTOMATION-TYPESCRIPT
 
-This project contains two main components: a simple calculator and the Snake game.
+# JavaScript & TypeScript Learning Project
 
-## Project Structure
+This project is created as part of the learning program to study JavaScript and TypeScript for creating an automated test framework. The goal is to master the basics of programming, working with test automation principles, and developing a robust testing framework using modern JavaScript and TypeScript features.
 
-- `calculator.html` — HTML file for the basic calculator.
-- `snake.html` and `snake.js` — files for the Snake game.
-- `index.html` — main page (if needed).
-- `.prettierrc` — configuration for code formatting.
-- `package.json` — project dependencies.
+## Installation
+
+To get started, clone the repository:
+
+```bash
+git clone https://github.com/iper1305/QA-AUTOMATION-TYPESCRIPT.git
+
 
 ## How to Run the Project
 
