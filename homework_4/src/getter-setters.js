@@ -69,7 +69,7 @@ bookStore.sections.addBook('nonfiction', { title: "Clean Code", price: 400 });
 bookStore.sections.fiction.discount = 20;
 bookStore.sections.nonfiction.rating = 4;
 
-console.log("Fiction discount:", bookStore.sections.fiction.discount);
+console.log("Discount for fiction:", bookStore.sections.fiction.discount);
 console.log("Fiction total price with discount:", bookStore.sections.fiction.totalPrice);
 console.log("Nonfiction rating:", bookStore.sections.nonfiction.rating);
 console.log("Nonfiction average price:", bookStore.sections.nonfiction.averagePrice);
