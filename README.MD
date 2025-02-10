@@ -69,10 +69,6 @@ try {
 npm install
 ```
 
-## Usage
-
-Run each example individually using Node.js:
-
 ```bash
 node src/promises.js
 node src/async-await.js
