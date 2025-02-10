@@ -2,7 +2,6 @@ import globals from 'globals';
 import pluginJs from '@eslint/js';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 
-
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {

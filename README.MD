@@ -1,25 +1,94 @@
-# QA-AUTOMATION-TYPESCRIPT
+# JavaScript Asynchronous Programming Examples
 
-# JavaScript & TypeScript Learning Project
+This project demonstrates different approaches to handling asynchronous operations in JavaScript, including Promises, async/await, and error handling.
 
-This project is created as part of the learning program to study JavaScript and TypeScript for creating an automated test framework. The goal is to master the basics of programming, working with test automation principles, and developing a robust testing framework using modern JavaScript and TypeScript features.
+## Project Structure
+
+```
+├── src/
+│   ├── promises.js        # Promise-based API request example
+│   ├── async-await.js     # Same functionality using async/await
+│   └── try-catch.js       # Error handling with multiple API requests
+├── package.json
+└── README.md
+```
+
+## Features
+
+- Fetching data from REST APIs
+- Processing JSON responses
+- Error handling
+- Multiple request attempts with fallback
+- Different approaches to async programming
+
+## Examples
+
+### 1. Promise-based Approach (promises.js)
+Demonstrates chaining `.then()` methods to handle API requests and data processing.
+
+```javascript
+fetchUserData()
+    .then(processedData => {
+        // Process data
+    })
+    .catch(error => {
+        // Handle errors
+    });
+```
+
+### 2. Async/Await Approach (async-await.js)
+Shows how to handle the same operations using async/await syntax for better readability.
+
+```javascript
+async function main() {
+    try {
+        const processedData = await fetchUserData();
+        // Process data
+    } catch (error) {
+        // Handle errors
+    }
+}
+```
+
+### 3. Advanced Error Handling (try-catch.js)
+Implements a fallback mechanism when the primary API request fails.
+
+```javascript
+try {
+    // Attempt primary request
+} catch {
+    // Attempt fallback request
+}
+```
 
 ## Installation
 
-To get started, clone the repository:
+1. Clone the repository
+2. Install dependencies:
+```bash
+npm install
+```
+
+## Usage
+
+Run each example individually using Node.js:
 
 ```bash
-git clone https://github.com/iper1305/QA-AUTOMATION-TYPESCRIPT.git
+node src/promises.js
+node src/async-await.js
+node src/try-catch.js
+```
 
+## Dependencies
 
-## How to Run the Project
+- node-fetch: For making HTTP requests
+- Other dev dependencies for linting and code quality
 
-1. Download or clone the repository:
-   ```bash
-   git clone <https://github.com/iper1305/FirstJSProject>
-   cd myFirstJSProject
+## Prerequisites
 
-## Install dependencies:
-   ```bash
-   npm install
+- Node.js v23.3.0 or higher
+- npm (Node Package Manager)
 
+## Notes
+
+This project is for educational purposes and demonstrates different approaches to handling asynchronous operations in JavaScript. Each file shows a different aspect of async programming and error handling.
