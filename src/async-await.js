@@ -10,7 +10,7 @@ async function fetchUserData() {
         return processUserData(users);
     } catch (error) {
         console.error('Error fetching data:', error);
-        throw error; // Re-throwing to handle in the main execution
+        throw error;
     }
 }
 
