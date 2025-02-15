@@ -7,10 +7,6 @@ const arrayProcessor = (...arrays: ValidArrayItem[][]): null | void => {
     }
 
     arrays.forEach((arr: ValidArrayItem[], index: number): void => {
-        if (!Array.isArray(arr)) {
-            console.warn(`Warning: Argument ${index + 1} is not an array`);
-            return;
-        }
 
         const numbers: number[] = arr.filter((item): item is number =>
             typeof item === 'number'

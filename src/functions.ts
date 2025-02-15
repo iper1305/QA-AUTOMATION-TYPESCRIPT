@@ -7,11 +7,6 @@ function processArrays(...arrays: ArrayElement[][]): void {
     }
 
     arrays.forEach((arr: ArrayElement[], index: number) => {
-        if (!Array.isArray(arr)) {
-            console.warn(`Warning: Argument ${index + 1} is not an array`);
-            return;
-        }
-
         const numbers: number[] = arr.filter((item): item is number =>
             typeof item === 'number'
         );
