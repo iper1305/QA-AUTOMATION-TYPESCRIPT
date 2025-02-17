@@ -1,14 +1,14 @@
-export interface ICharacterResponse {
+export interface CharacterResponse {
     info: {
         count: number;
         pages: number;
         next: string | null;
         prev: string | null;
     };
-    results: ICharacter[];
+    results: CharacterDate[];
 }
 
-export interface ICharacter {
+export interface CharacterDate {
     id: number;
     name: string;
     status: string;

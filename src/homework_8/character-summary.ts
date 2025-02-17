@@ -1,4 +1,4 @@
-import { ICharacter } from './types';
+import { CharacterDate } from './types';
 
 export class CharacterSummary {
     public name: string;
@@ -6,7 +6,7 @@ export class CharacterSummary {
     public isAlive: boolean;
     public originLocation: string;
 
-    public constructor(character: ICharacter) {
+    public constructor(character: CharacterDate) {
         this.name = character.name;
         this.totalEpisodes = character.episode.length;
         this.isAlive = character.status === 'Alive';

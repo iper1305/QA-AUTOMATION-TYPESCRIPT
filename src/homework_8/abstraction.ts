@@ -1,4 +1,4 @@
-import { ICharacter } from './types';
+import { CharacterDate } from './types';
 
 export abstract class EntityBase {
     protected id: number;
@@ -26,7 +26,7 @@ export class Character extends EntityBase {
     private species: string;
     private status: string;
 
-    public constructor(character: ICharacter) {
+    public constructor(character: CharacterDate) {
         super(character.id, character.name, character.created);
         this.species = character.species;
         this.status = character.status;
