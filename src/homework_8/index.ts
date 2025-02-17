@@ -1,6 +1,6 @@
 import { fetchCharacters } from './api';
 import { Character } from './abstraction';
-import { CharacterSummary } from './character-summary.';
+import { CharacterSummary } from './character-summary';
 
 async function main(): Promise<void> {
     try {
