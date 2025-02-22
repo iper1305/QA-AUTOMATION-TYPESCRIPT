@@ -3,7 +3,7 @@ import {Guitar} from './instruments/guitar';
 import {Violin} from './instruments/violin';
 
 function performConcert(instrument: IMusicalInstrument): void {
-    console.log(`Preparing for performance with: ${instrument.getName()}`);
+    console.log(`Preparing for performance with: ${instrument.getInstrumentName()}`);
     console.log(instrument.tune());
     console.log(instrument.play());
     console.log('---');

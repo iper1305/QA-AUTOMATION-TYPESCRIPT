@@ -6,9 +6,9 @@ export class Violin extends StringInstrument {
     }
 
     public play(): string {
-        if (!this.isInTune) {
-            return `${this.name} is out of tune!`;
+        if (!this.isTuned) {
+            return `${this.instrumentName} is out of tune!`;
         }
-        return `${this.name} creates magical melody`;
+        return `${this.instrumentName} creates magical melody`;
     }
 }

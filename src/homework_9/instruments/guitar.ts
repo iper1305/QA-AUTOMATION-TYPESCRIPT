@@ -9,9 +9,9 @@ export class Guitar extends StringInstrument {
     }
 
     public play(): string {
-        if (!this.isInTune) {
-            return `${this.name} is out of tune!`;
+        if (!this.isTuned) {
+            return `${this.instrumentName} is out of tune!`;
         }
-        return `${this.type} ${this.name} plays melodiously`;
+        return `${this.type} ${this.instrumentName} plays melodiously`;
     }
 }
