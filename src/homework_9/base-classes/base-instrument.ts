@@ -1,6 +1,4 @@
-import {IMusicalInstrument} from './interfaces/i-musical-instrument';
-
-export class BaseInstrument implements IMusicalInstrument {
+export class BaseInstrument {
     protected name: string;
 
     public constructor(name: string) {

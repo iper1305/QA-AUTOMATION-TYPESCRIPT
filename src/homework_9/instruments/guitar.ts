@@ -1,12 +1,10 @@
-import {BaseTunableInstrument} from '../base-tunable-instrument';
-import {IStringInstrument} from '../interfaces/i-string-instrument';
+import {BaseStringInstrument} from '../base-classes/base-string-instrument';
 
-export class Guitar extends BaseTunableInstrument implements IStringInstrument {
+export class Guitar extends BaseStringInstrument {
     private type: string;
-    private readonly strings: number = 6;
 
     public constructor(type = 'acoustic') {
-        super('Guitar');
+        super('Guitar', 6);
         this.type = type;
     }
 
@@ -15,14 +13,5 @@ export class Guitar extends BaseTunableInstrument implements IStringInstrument {
             return `${this.name} is out of tune!`;
         }
         return `${this.type} ${this.name} plays melodiously`;
-    }
-
-    public getNumberOfStrings(): number {
-        return this.strings;
-    }
-
-    public tune(): string {
-        const baseMessage = super.tune();
-        return `${baseMessage}. All ${this.strings} strings tuned`;
     }
 }

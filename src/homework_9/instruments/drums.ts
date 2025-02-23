@@ -1,4 +1,4 @@
-import {BaseInstrument} from '../base-instrument';
+import {BaseInstrument} from '../base-classes/base-instrument';
 
 export class Drums extends BaseInstrument {
     public constructor() {

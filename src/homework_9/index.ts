@@ -1,20 +1,20 @@
-import { IMusicalInstrument } from './interfaces/i-musical-instrument';
-import { ITunableInstrument } from './interfaces/i-tunable-instrument';
-import { Guitar } from './instruments/guitar';
-import { Violin } from './instruments/violin';
-import {IStringInstrument} from './interfaces/i-string-instrument';
+import {BaseInstrument} from './base-classes/base-instrument';
+import {BaseTunableInstrument} from './base-classes/base-tunable-instrument';
+import {Guitar} from './instruments/guitar';
+import {BaseStringInstrument} from './base-classes/base-string-instrument';
+import {Violin} from './instruments/violin';
 import {Drums} from './instruments/drums';
 
-function prepareForConcert(instruments: IMusicalInstrument[]): void {
+function prepareForConcert(instruments: BaseInstrument[]): void {
     console.log('Preparing all instruments for the concert...');
 
-    instruments.forEach(instrument => {
+    instruments.forEach((instrument) => {
         console.log(`Preparing ${instrument.getInstrumentName()}`);
 
-        if (isTunable(instrument)) {
+        if (instrument instanceof BaseTunableInstrument) {
             console.log(instrument.tune());
 
-            if (isStringInstrument(instrument)) {
+            if (instrument instanceof BaseStringInstrument) {
                 console.log(`This instrument has ${instrument.getNumberOfStrings()} strings`);
             }
         }
@@ -22,14 +22,6 @@ function prepareForConcert(instruments: IMusicalInstrument[]): void {
         console.log(instrument.play());
         console.log('---');
     });
-}
-
-function isTunable(instrument: IMusicalInstrument): instrument is ITunableInstrument {
-    return 'tune' in instrument;
-}
-
-function isStringInstrument(instrument: ITunableInstrument): instrument is IStringInstrument {
-    return 'getNumberOfStrings' in instrument;
 }
 
 const guitar = new Guitar();

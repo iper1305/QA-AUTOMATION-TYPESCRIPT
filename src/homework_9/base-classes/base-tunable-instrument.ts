@@ -1,5 +1,5 @@
 import {BaseInstrument} from './base-instrument';
-import {ITunableInstrument} from './interfaces/i-tunable-instrument';
+import {ITunableInstrument} from '../interfaces/i-tunable-instrument';
 
 export class BaseTunableInstrument extends BaseInstrument implements ITunableInstrument {
     protected tuned = false;
