@@ -1,4 +1,4 @@
-import {StringInstrument} from '../abstracts/string-instrument';
+import { StringInstrument } from '../abstracts/string-instrument';
 
 export class Guitar extends StringInstrument {
     private type: string;
@@ -9,9 +9,9 @@ export class Guitar extends StringInstrument {
     }
 
     public play(): string {
-        if (!this.isTuned) {
-            return `${this.instrumentName} is out of tune!`;
+        if (!this.isInTune) {
+            return `${this.name} is out of tune!`;
         }
-        return `${this.type} ${this.instrumentName} plays melodiously`;
+        return `${this.type} ${this.name} plays melodiously`;
     }
 }

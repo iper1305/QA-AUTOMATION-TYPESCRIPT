@@ -1,15 +1,15 @@
-import {MusicalInstrument} from './musical-instrument';
+import { TunableInstrument } from './tunable-instrument';
 
-export abstract class StringInstrument extends MusicalInstrument {
-    protected stringCount: number;
+export abstract class StringInstrument extends TunableInstrument {
+    protected numberOfStrings: number;
 
-    public constructor(name: string, stringCount: number) {
+    public constructor(name: string, numberOfStrings: number) {
         super(name);
-        this.stringCount = stringCount;
+        this.numberOfStrings = numberOfStrings;
     }
 
     public tune(): string {
         const baseMessage = super.tune();
-        return `${baseMessage}. All ${this.stringCount} strings tuned`;
+        return `${baseMessage}. All ${this.numberOfStrings} strings tuned`;
     }
 }

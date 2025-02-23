@@ -1,4 +1,4 @@
-import {StringInstrument} from '../abstracts/string-instrument';
+import { StringInstrument } from '../abstracts/string-instrument';
 
 export class Violin extends StringInstrument {
     public constructor() {
@@ -6,9 +6,9 @@ export class Violin extends StringInstrument {
     }
 
     public play(): string {
-        if (!this.isTuned) {
-            return `${this.instrumentName} is out of tune!`;
+        if (!this.isInTune) {
+            return `${this.name} is out of tune!`;
         }
-        return `${this.instrumentName} creates magical melody`;
+        return `${this.name} creates magical melody`;
     }
 }
