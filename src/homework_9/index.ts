@@ -5,7 +5,7 @@ import {BaseStringInstrument} from './base-classes/base-string-instrument';
 import {Violin} from './instruments/violin';
 import {Drums} from './instruments/drums';
 
-function prepareForConcert(instruments: BaseInstrument[]): void {
+export function prepareForConcert(instruments: BaseInstrument[]): void {
     console.log('Preparing all instruments for the concert...');
 
     instruments.forEach((instrument) => {
