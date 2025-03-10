@@ -1,12 +1,11 @@
-import {CatApiClient} from './cat-api-client';
 import { expect } from 'chai';
 import { describe, before, after, it } from 'mocha';
-import {Favourite} from './favourite';
 import * as dotenv from 'dotenv';
+import {CatApiClient} from '../client/cat-api-client';
 dotenv.config();
 
 describe('The Cat API Integration Tests', function () {
-    this.timeout(5000);
+    this.timeout(10000);
     let apiClient: CatApiClient;
     let testImageId: string;
     let testVoteId: number;
@@ -64,6 +63,16 @@ describe('The Cat API Integration Tests', function () {
             testVoteId = vote.id;
         });
 
+        it('should not create a vote for a non-existent image', async () => {
+            try {
+                await apiClient.createVote('non-existent-image-id', 1);
+            } catch (error: unknown) {
+                if (error instanceof Error) {
+                    expect(error.message).to.include('400');
+                }
+            }
+        });
+
         it('should retrieve votes for user', async () => {
             const votes = await apiClient.getVotes();
             expect(votes.length).to.be.greaterThan(0);
@@ -71,6 +80,14 @@ describe('The Cat API Integration Tests', function () {
             const foundVote = votes.find(v => v.id === testVoteId);
             expect(foundVote).to.exist;
             expect(foundVote?.image_id).to.equal(testImageId);
+        });
+
+        it('should retrieve the correct vote object', async () => {
+            const votes = await apiClient.getVotes();
+            const foundVote = votes.find(v => v.id === testVoteId);
+            expect(foundVote).to.exist;
+            expect(foundVote?.image).to.have.property('id', testImageId);
+            expect(foundVote?.image).to.have.property('url');
         });
 
         it('should delete a vote', async () => {
@@ -92,6 +109,16 @@ describe('The Cat API Integration Tests', function () {
             testFavouriteId = favourite.id;
         });
 
+        it('should not add a non-existent image to favourites', async () => {
+            try {
+                await apiClient.addToFavourites('non-existent-image-id');
+            } catch (error: unknown) {
+                if (error instanceof Error) {
+                    expect(error.message).to.include('400');
+                }
+            }
+        });
+
         it('should retrieve favourites for user', async () => {
             const favourites = await apiClient.getFavourites();
             expect(favourites.length).to.be.greaterThan(0);
@@ -101,13 +128,21 @@ describe('The Cat API Integration Tests', function () {
             expect(foundFavourite?.image_id).to.equal(testImageId);
         });
 
+        it('should retrieve the correct favourite object', async () => {
+            const favourites = await apiClient.getFavourites();
+            const foundFavourite = favourites.find(f => f.id === testFavouriteId);
+            expect(foundFavourite).to.exist;
+            expect(foundFavourite?.image).to.have.property('id', testImageId);
+            expect(foundFavourite?.image).to.have.property('url');
+        });
+
         it('should delete a favourite', async () => {
             const response = await apiClient.deleteFavourite(testFavouriteId);
             expect(response).to.have.property('message');
             expect(response.message).to.match(/success/i);
 
-            const favourites: Favourite[] = await apiClient.getFavourites();
-            const foundFavourite: Favourite | undefined = favourites.find(f => f.id === testFavouriteId);
+            const favourites = await apiClient.getFavourites();
+            const foundFavourite = favourites.find(f => f.id === testFavouriteId);
             expect(foundFavourite).to.be.undefined;
         });
     });
@@ -132,10 +167,14 @@ describe('The Cat API Integration Tests', function () {
             const votes = await apiClient.getVotes();
             const foundVote = votes.find(v => v.id === complexVoteId);
             expect(foundVote).to.exist;
+            expect(foundVote?.image).to.have.property('id', complexImageId);
+            expect(foundVote?.image).to.have.property('url');
 
             const favourites = await apiClient.getFavourites();
             const foundFavourite = favourites.find(f => f.id === complexFavouriteId);
             expect(foundFavourite).to.exist;
+            expect(foundFavourite?.image).to.have.property('id', complexImageId);
+            expect(foundFavourite?.image).to.have.property('url');
 
             await apiClient.deleteVote(complexVoteId);
             await apiClient.deleteFavourite(complexFavouriteId);

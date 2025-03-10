@@ -17,13 +17,17 @@ flowchart TB
 
     subgraph VotesTests["Vote Tests"]
         CreateVote["Creating a vote\nfor an image"]
+        CreateVoteNonExistent["Creating a vote\nfor a non-existent image"]
         GetVotes["Retrieving user's\nvotes list"]
+        GetVoteObject["Retrieving specific vote\nobject with image details"]
         DeleteVote["Deleting a vote"]
     end
 
     subgraph FavouritesTests["Favourites Tests"]
         AddToFavourites["Adding an image\nto favourites"]
+        AddNonExistentToFavourites["Adding a non-existent\nimage to favourites"]
         GetFavourites["Retrieving list\nof favourites"]
+        GetFavouriteObject["Retrieving specific favourite\nobject with image details"]
         DeleteFavourite["Removing from favourites"]
     end
 
@@ -45,3 +49,8 @@ flowchart TB
     ImagesTests --> VotesTests
     VotesTests --> FavouritesTests
     FavouritesTests --> ComplexTests
+
+    CreateVote --> CreateVoteNonExistent
+    GetVotes --> GetVoteObject
+    AddToFavourites --> AddNonExistentToFavourites
+    GetFavourites --> GetFavouriteObject

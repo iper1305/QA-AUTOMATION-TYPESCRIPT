@@ -1,9 +1,9 @@
 import axios, { AxiosInstance } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import {ICatImage} from './i-cat-image';
-import {IVote} from './i-vote';
-import {Favourite} from './favourite';
-import {IDeleteResponse} from './i-delete-response';
+import { ICatImage } from '../interfaces/i-cat-image';
+import { IVote } from '../interfaces/i-vote';
+import { IFavourite } from '../interfaces/i-favourite';
+import { IDeleteResponse } from '../interfaces/i-delete-response';
 
 export class CatApiClient {
     private client: AxiosInstance;
@@ -47,7 +47,7 @@ export class CatApiClient {
         return response.data;
     }
 
-    public async addToFavourites(imageId: string): Promise<Favourite> {
+    public async addToFavourites(imageId: string): Promise<IFavourite> {
         const response = await this.client.post('/favourites', {
             image_id: imageId,
             sub_id: this.subId
@@ -55,7 +55,7 @@ export class CatApiClient {
         return response.data;
     }
 
-    public async getFavourites(): Promise<Favourite[]> {
+    public async getFavourites(): Promise<IFavourite[]> {
         const response = await this.client.get('/favourites', {
             params: { sub_id: this.subId }
         });

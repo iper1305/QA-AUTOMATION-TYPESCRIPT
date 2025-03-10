@@ -2,13 +2,12 @@ import { describe, it } from 'mocha';
 import axios from 'axios';
 import * as chai from 'chai';
 import { MatchersV3 } from '@pact-foundation/pact';
-import { pact } from './pact-config/pact-config';
+import {pact} from '../../pact-config/pact-config';
 
 describe('PetStore API Consumer Contract', () => {
     describe('Getting a pet by ID', () => {
         const petId = 1;
-
-        const petMatcher = {
+        const expectedPet = {
             id: MatchersV3.number(petId),
             name: MatchersV3.string('Fluffy'),
             status: MatchersV3.string('available')
@@ -26,7 +25,7 @@ describe('PetStore API Consumer Contract', () => {
                 willRespondWith: {
                     status: 200,
                     headers: { 'Content-Type': 'application/json' },
-                    body: MatchersV3.eachLike(petMatcher)
+                    body: expectedPet
                 }
             };
 

@@ -9,5 +9,5 @@ export const pact = new PactV3({
     provider: providerName,
     port: 5678,
     logLevel: 'debug',
-    dir: path.resolve(__dirname, '../../../pacts')
+    dir: path.resolve(__dirname, '../pacts') // Оновлений шлях
 });
