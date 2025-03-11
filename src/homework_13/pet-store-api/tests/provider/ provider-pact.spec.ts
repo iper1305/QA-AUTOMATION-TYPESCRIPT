@@ -6,16 +6,16 @@ describe('Pact Verification', () => {
         this.timeout(10000); // Додати таймаут, щоб дати більше часу для підключення
 
         const opts = {
-            providerBaseUrl: 'http://localhost:8080', // URL вашого працюючого API
+            providerBaseUrl: 'https://petstore.swagger.io/v2', // URL вашого працюючого API
             pactUrls: [path.resolve(__dirname, '../../pacts')],
             provider: 'PetStoreAPI',
-            providerVersion: '1.0.0',
-            stateHandlers: {
-                'a pet with ID 1 exists': async () => {
-                    // Налаштуйте стан провайдера тут (наприклад, переконайтеся, що pet з ID 1 існує в базі даних)
-                    return Promise.resolve();
-                }
-            }
+            providerVersion: '1.0.0'
+            // stateHandlers: {
+            //     'a pet with ID 1 exists': async () => {
+            //         // Налаштуйте стан провайдера тут (наприклад, переконайтеся, що pet з ID 1 існує в базі даних)
+            //         return Promise.resolve();
+            //     }
+            // }
         };
 
         const verifier = new Verifier(opts);

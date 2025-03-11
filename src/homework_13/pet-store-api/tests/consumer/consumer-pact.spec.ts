@@ -31,8 +31,8 @@ describe('PetStore API Consumer Contract', () => {
 
             await pact.addInteraction(interaction);
 
-            await pact.executeTest(async () => {
-                const response = await axios.get(`http://localhost:5678/pet/${petId}`, {
+            await pact.executeTest(async (mockServer) => {
+                const response = await axios.get(`${mockServer.url}/pet/${petId}`, {
                     headers: { Accept: 'application/json' }
                 });
 
