@@ -4,7 +4,7 @@ import Product from '../api-objects/product';
 import Price from '../api-objects/price';
 import Payment from '../api-objects/payment';
 
-describe('Stripe API тести', () => {
+describe('Stripe API tests', () => {
     let customerId: string;
     let productId: string;
     let priceId: string;
