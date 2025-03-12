@@ -97,7 +97,7 @@ describe('Integration Tests', function() {
             expect(consoleLogStub.firstCall.args[0]).to.equal('Preparing all instruments for the concert...');
         });
 
-        it('should correctly identify instrument interfaces using instanceof', function() {
+        it('should correctly identify instrument types using instanceof', function() {
             const baseInstrument = new BaseInstrument('Base');
             const tunableInstrument = new BaseTunableInstrument('Tunable');
             const stringInstrument = new BaseStringInstrument('String', 3);
