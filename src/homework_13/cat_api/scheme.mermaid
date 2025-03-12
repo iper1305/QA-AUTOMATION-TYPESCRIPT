@@ -1,0 +1,56 @@
+flowchart TB
+    subgraph Setup["Test Environment Setup"]
+        Init["CatApiClient Initialization\n(with API key)"]
+        Cleanup["Test Data Cleanup\n(removing votes and favorites)"]
+    end
+
+    subgraph TestModules["Test Modules"]
+        ImagesModule["Images Module"]
+        VotesModule["Votes Module"]
+        FavouritesModule["Favourites Module"]
+        ComplexIntegration["Complex Integration\nbetween all modules"]
+    end
+
+    subgraph ImagesTests["Image Tests"]
+        GetRandomImages["Retrieving random\ncat images"]
+    end
+
+    subgraph VotesTests["Vote Tests"]
+        CreateVote["Creating a vote\nfor an image"]
+        CreateVoteNonExistent["Creating a vote\nfor a non-existent image"]
+        GetVotes["Retrieving user's\nvotes list"]
+        GetVoteObject["Retrieving specific vote\nobject with image details"]
+        DeleteVote["Deleting a vote"]
+    end
+
+    subgraph FavouritesTests["Favourites Tests"]
+        AddToFavourites["Adding an image\nto favourites"]
+        AddNonExistentToFavourites["Adding a non-existent\nimage to favourites"]
+        GetFavourites["Retrieving list\nof favourites"]
+        GetFavouriteObject["Retrieving specific favourite\nobject with image details"]
+        DeleteFavourite["Removing from favourites"]
+    end
+
+    subgraph ComplexTests["Complex Tests"]
+        FullWorkflow["Complete workflow:\n1. Get image\n2. Vote\n3. Add to favourites\n4. Verify existence\n5. Delete everything\n6. Verify deletion"]
+    end
+
+    Init --> ImagesModule
+    ImagesModule --> VotesModule
+    VotesModule --> FavouritesModule
+    FavouritesModule --> ComplexIntegration
+    ComplexIntegration --> Cleanup
+
+    ImagesModule --> ImagesTests
+    VotesModule --> VotesTests
+    FavouritesModule --> FavouritesTests
+    ComplexIntegration --> ComplexTests
+
+    ImagesTests --> VotesTests
+    VotesTests --> FavouritesTests
+    FavouritesTests --> ComplexTests
+
+    CreateVote --> CreateVoteNonExistent
+    GetVotes --> GetVoteObject
+    AddToFavourites --> AddNonExistentToFavourites
+    GetFavourites --> GetFavouriteObject
