@@ -12,16 +12,16 @@
     "test": "mocha -r ts-node/register **/*.spec.ts",
     "test:base": "mocha -r ts-node/register base-classes.spec.ts",
     "test:instruments": "mocha -r ts-node/register instruments.spec.ts",
-    "test:integration": "mocha -r ts-node/register integration.spec.ts",
+    "test:integration": "mocha -r ts-node/register integration.spec.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.4.7",
     "eslint-plugin-unicorn": "^56.0.1",
     "tslog": "^4.9.3",
-    "typescript": "^5.6.2",
-    "axios": "^1.6.0",
-    "dotenv": "^16.3.1"
+    "typescript": "^5.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.26.9",

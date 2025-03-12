@@ -1,5 +1,5 @@
-import {ICustomerData} from '../interfaces/i-customer-data';
-import {ICustomer} from '../interfaces/i-customer';
+import { ICustomerData } from '../interfaces/i-customer-data';
+import { ICustomer } from '../interfaces/i-customer';
 import stripeService from '../services/stripe-service';
 
 class Customer {
@@ -15,12 +15,12 @@ class Customer {
         return stripeService.post<ICustomer>(`/customers/${customerId}`, customerData);
     }
 
-    public static async delete(customerId: string): Promise<{ deleted: boolean; id: string }> {
-        return stripeService.delete<{ deleted: boolean; id: string }>(`/customers/${customerId}`);
-    }
-
     public static async list(limit = 10): Promise<{ data: ICustomer[]; has_more: boolean; url: string }> {
         return stripeService.get<{ data: ICustomer[]; has_more: boolean; url: string }>('/customers', { limit });
+    }
+
+    public static async delete(customerId: string): Promise<void> {
+        return stripeService.delete(`/customers/${customerId}`);
     }
 }
 

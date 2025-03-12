@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 import * as dotenv from 'dotenv';
+dotenv.config({ path: './src/homework_14/.env' });
 
 dotenv.config();
 
@@ -24,20 +25,20 @@ class StripeService {
         });
     }
 
-    private convertToFormData(params: Record<string, any>): string {
+    private convertToFormData(params: Record<string, unknown>): string {
         return Object.keys(params)
             .map(key => {
                 if (typeof params[key] === 'object' && params[key] !== null) {
-                    return Object.keys(params[key]).map(subKey =>
-                        `${encodeURIComponent(`${key}[${subKey}]`)}=${encodeURIComponent(params[key][subKey])}`
+                    return Object.keys(params[key] as Record<string, unknown>).map(subKey =>
+                        `${encodeURIComponent(`${key}[${subKey}]`)}=${encodeURIComponent((params[key] as Record<string, unknown>)[subKey] as string)}`
                     ).join('&');
                 }
-                return `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`;
+                return `${encodeURIComponent(key)}=${encodeURIComponent(params[key] as string)}`;
             })
             .join('&');
     }
 
-    public async get<T>(endpoint: string, params: Record<string, any> = {}): Promise<T> {
+    public async get<T>(endpoint: string, params: Record<string, unknown> = {}): Promise<T> {
         try {
             const response = await this.client.get<T>(endpoint, { params });
             return response.data;
@@ -46,7 +47,7 @@ class StripeService {
         }
     }
 
-    public async post<T>(endpoint: string, data: Record<string, any> = {}): Promise<T> {
+    public async post<T>(endpoint: string, data: Record<string, unknown> = {}): Promise<T> {
         try {
             const formData = this.convertToFormData(data);
             const response = await this.client.post<T>(endpoint, formData);
