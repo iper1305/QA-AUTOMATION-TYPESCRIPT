@@ -25,19 +25,6 @@ class StripeService {
         });
     }
 
-    private convertToFormData(params: Record<string, unknown>): string {
-        return Object.keys(params)
-            .map(key => {
-                if (typeof params[key] === 'object' && params[key] !== null) {
-                    return Object.keys(params[key] as Record<string, unknown>).map(subKey =>
-                        `${encodeURIComponent(`${key}[${subKey}]`)}=${encodeURIComponent((params[key] as Record<string, unknown>)[subKey] as string)}`
-                    ).join('&');
-                }
-                return `${encodeURIComponent(key)}=${encodeURIComponent(params[key] as string)}`;
-            })
-            .join('&');
-    }
-
     public async get<T>(endpoint: string, params: Record<string, unknown> = {}): Promise<T> {
         try {
             const response = await this.client.get<T>(endpoint, { params });
@@ -64,6 +51,19 @@ class StripeService {
         } catch (error) {
             throw this.handleError(error);
         }
+    }
+
+    private convertToFormData(params: Record<string, unknown>): string {
+        return Object.keys(params)
+            .map(key => {
+                if (typeof params[key] === 'object' && params[key] !== null) {
+                    return Object.keys(params[key] as Record<string, unknown>).map(subKey =>
+                        `${encodeURIComponent(`${key}[${subKey}]`)}=${encodeURIComponent((params[key] as Record<string, unknown>)[subKey] as string)}`
+                    ).join('&');
+                }
+                return `${encodeURIComponent(key)}=${encodeURIComponent(params[key] as string)}`;
+            })
+            .join('&');
     }
 
     private handleError(error: unknown): Error {

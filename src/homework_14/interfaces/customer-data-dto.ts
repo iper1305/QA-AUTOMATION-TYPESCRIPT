@@ -1,4 +1,4 @@
-export interface ICustomerData {
+export interface CustomerDataDto {
     email: string;
     name: string;
     description?: string;

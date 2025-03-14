@@ -1,4 +1,4 @@
-export interface IPriceData {
+export interface PriceDataDto {
     product: string;
     unit_amount: number;
     currency: string;

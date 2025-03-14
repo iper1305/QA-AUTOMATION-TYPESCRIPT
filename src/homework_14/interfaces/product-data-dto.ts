@@ -1,4 +1,4 @@
-export interface IProductData {
+export interface ProductDataDto {
     name: string;
     description?: string;
     active?: boolean;

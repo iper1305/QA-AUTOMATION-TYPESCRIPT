@@ -1,4 +1,4 @@
-export interface IPaymentIntentData {
+export interface IPaymentData {
     amount: number;
     currency: string;
     customer?: string;

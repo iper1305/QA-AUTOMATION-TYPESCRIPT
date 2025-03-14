@@ -1,8 +1,8 @@
 import { expect } from 'chai';
-import Customer from '../api-objects/customer';
-import Product from '../api-objects/product';
-import Price from '../api-objects/price';
-import Payment from '../api-objects/payment';
+import customerApi from '../api-objects/customer-api';
+import priceApi from '../api-objects/price-api';
+import paymentApi from '../api-objects/payment-api';
+import productApi from '../api-objects/product-api';
 
 describe('Stripe API tests', () => {
     let customerId: string;
@@ -17,7 +17,7 @@ describe('Stripe API tests', () => {
             description: 'Created for API testing'
         };
 
-        const customer = await Customer.create(customerData);
+        const customer = await customerApi.create(customerData);
         customerId = customer.id;
 
         expect(customer).to.exist;
@@ -34,7 +34,7 @@ describe('Stripe API tests', () => {
             active: true
         };
 
-        const product = await Product.create(productData);
+        const product = await productApi.create(productData);
         productId = product.id;
 
         expect(product).to.exist;
@@ -55,7 +55,7 @@ describe('Stripe API tests', () => {
             }
         };
 
-        const price = await Price.create(priceData);
+        const price = await priceApi.create(priceData);
         priceId = price.id;
 
         expect(price).to.exist;
@@ -74,7 +74,7 @@ describe('Stripe API tests', () => {
             payment_method_types: ['card']
         };
 
-        const paymentIntent = await Payment.createPaymentIntent(paymentData);
+        const paymentIntent = await paymentApi.createPaymentIntent(paymentData);
         paymentIntentId = paymentIntent.id;
 
         expect(paymentIntent).to.exist;
@@ -90,7 +90,7 @@ describe('Stripe API tests', () => {
             cancellation_reason: 'requested_by_customer' as 'requested_by_customer' | 'duplicate' | 'fraudulent' | 'abandoned'
         };
 
-        const cancelledPaymentIntent = await Payment.cancelPayment(paymentIntentId, cancelData);
+        const cancelledPaymentIntent = await paymentApi.cancelPayment(paymentIntentId, cancelData);
 
         expect(cancelledPaymentIntent).to.exist;
         expect(cancelledPaymentIntent.id).to.equal(paymentIntentId);
@@ -102,7 +102,7 @@ describe('Stripe API tests', () => {
         if (priceId) {
             try {
                 console.log(`Deactivating price ${priceId}`);
-                await Price.update(priceId, { active: false });
+                await priceApi.update(priceId, { active: false });
             } catch (error) {
                 console.error(`Failed to deactivate price ${priceId}`, error);
             }
@@ -111,7 +111,7 @@ describe('Stripe API tests', () => {
         if (productId) {
             try {
                 console.log(`Deactivating product ${productId}`);
-                await Product.update(productId, { active: false });
+                await productApi.update(productId, { active: false });
             } catch (error) {
                 console.error(`Failed to deactivate product ${productId}`, error);
             }
@@ -120,7 +120,7 @@ describe('Stripe API tests', () => {
         if (customerId) {
             try {
                 console.log(`Deleting customer ${customerId}`);
-                await Customer.delete(customerId);
+                await customerApi.delete(customerId);
             } catch (error) {
                 console.error(`Failed to delete customer ${customerId}`, error);
             }

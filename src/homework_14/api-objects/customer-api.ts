@@ -1,27 +1,27 @@
-import { ICustomerData } from '../interfaces/i-customer-data';
 import { ICustomer } from '../interfaces/i-customer';
 import stripeService from '../services/stripe-service';
+import {CustomerDataDto} from '../interfaces/customer-data-dto';
 
-class Customer {
-    public static async create(customerData: ICustomerData): Promise<ICustomer> {
+class CustomerApi {
+    public async create(customerData: CustomerDataDto): Promise<ICustomer> {
         return stripeService.post<ICustomer>('/customers', customerData);
     }
 
-    public static async retrieve(customerId: string): Promise<ICustomer> {
+    public async get(customerId: string): Promise<ICustomer> {
         return stripeService.get<ICustomer>(`/customers/${customerId}`);
     }
 
-    public static async update(customerId: string, customerData: Partial<ICustomerData>): Promise<ICustomer> {
+    public async update(customerId: string, customerData: Partial<CustomerDataDto>): Promise<ICustomer> {
         return stripeService.post<ICustomer>(`/customers/${customerId}`, customerData);
     }
 
-    public static async list(limit = 10): Promise<{ data: ICustomer[]; has_more: boolean; url: string }> {
+    public async list(limit = 10): Promise<{ data: ICustomer[]; has_more: boolean; url: string }> {
         return stripeService.get<{ data: ICustomer[]; has_more: boolean; url: string }>('/customers', { limit });
     }
 
-    public static async delete(customerId: string): Promise<void> {
+    public async delete(customerId: string): Promise<void> {
         return stripeService.delete(`/customers/${customerId}`);
     }
 }
 
-export default Customer;
+export default new CustomerApi();

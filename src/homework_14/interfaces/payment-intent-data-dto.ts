@@ -1,4 +1,4 @@
-export interface IPaymentIntent {
+export interface PaymentIntentDataDto {
     id: string;
     object: string;
     amount: number;
