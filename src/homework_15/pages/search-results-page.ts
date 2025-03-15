@@ -4,7 +4,7 @@ export class SearchResultsPage {
     private driver: WebDriver;
     private searchResultsCss = '.s-result-list [data-index]';
     private firstResultTitleXpath = '(//div[contains(@class, "s-result-item")]//h2//span)[1]';
-    private firstResultLinkXpath = '(//div[contains(@class, "s-result-item")]//a[contains(@class, "a-link-normal")])[1]'; // Targets the first link in the result
+    private firstResultLinkXpath = '(//div[contains(@class, "s-result-item")]//a[contains(@class, "a-link-normal")])[1]';
 
     public constructor(driver: WebDriver) {
         this.driver = driver;
