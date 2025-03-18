@@ -1,12 +1,14 @@
 import { expect } from 'chai';
-import {HomePage} from '../pages/home-page';
-import {getBrowser, getPage, quitBrowser} from '../utils/browser';
-import {SearchResultsPage} from '../pages/search-results-page';
-import {ProductPage} from '../pages/product-page';
+import { Browser, Page } from 'puppeteer';
+import { HomePage } from '../pages/home-page';
+import { SearchResultsPage } from '../pages/search-results-page';
+import { ProductPage } from '../pages/product-page';
+import { getBrowser, getPage, quitBrowser } from '../utils/browser';
+import { captureScreenshot, capturePageContent } from '../utils/test-utils';
 
 describe('ProductPage Tests', function () {
-    let browser: import('puppeteer').Browser;
-    let page: import('puppeteer').Page;
+    let browser: Browser;
+    let page: Page;
     let homePage: HomePage;
     let searchResultsPage: SearchResultsPage;
     let productPage: ProductPage;
@@ -25,6 +27,13 @@ describe('ProductPage Tests', function () {
         await quitBrowser(browser);
     });
 
+    afterEach(async function() {
+        if (this.currentTest?.state === 'failed') {
+            await captureScreenshot(page, this.currentTest.title);
+            await capturePageContent(page, this.currentTest.title);
+        }
+    });
+
     it('should display correct product title', async () => {
         await homePage.open();
         await homePage.enterSearchQuery('TypeScript books');
@@ -32,6 +41,6 @@ describe('ProductPage Tests', function () {
         await searchResultsPage.clickFirstResult();
 
         const productTitle = await productPage.getProductTitle();
-        expect(productTitle.toLowerCase()).to.include('typescript', 'Product name consist "TypeScript"');
+        expect(productTitle.toLowerCase()).to.include('typescript', 'Product name should contain "TypeScript"');
     });
 });

@@ -1,11 +1,14 @@
-export class ProductPage {
-    private page: import('puppeteer').Page;
+import { Page } from 'puppeteer';
+import { BasePage } from './base-page';
 
-    public constructor(page: import('puppeteer').Page) {
-        this.page = page;
+export class ProductPage extends BasePage {
+    private readonly productTitleSelector = '#productTitle';
+
+    public constructor(page: Page) {
+        super(page);
     }
 
     public async getProductTitle(): Promise<string> {
-        return await this.page.$eval('#productTitle', el => el.textContent?.trim() || '');
+        return await this.page.$eval(this.productTitleSelector, el => el.textContent?.trim() || '');
     }
 }

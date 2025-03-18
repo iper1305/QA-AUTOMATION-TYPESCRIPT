@@ -1,19 +1,24 @@
-export class SearchResultsPage {
-    private page: import('puppeteer').Page;
+import { Page } from 'puppeteer';
+import { BasePage } from './base-page';
 
-    public constructor(page: import('puppeteer').Page) {
-        this.page = page;
+export class SearchResultsPage extends BasePage {
+    private readonly resultsSelector = '.s-result-list [data-index]';
+    private readonly firstResultTitleSelector = '.s-result-item .a-link-normal .a-text-normal';
+    private readonly firstResultLinkSelector = '.s-result-item .a-link-normal';
+
+    public constructor(page: Page) {
+        super(page);
     }
 
     public async getResultsCount(): Promise<number> {
-        const count = await this.page.$$eval('.s-result-list [data-index]', elements => elements.length);
+        const count = await this.page.$$eval(this.resultsSelector, elements => elements.length);
         console.log('Found results count:', count);
         return count;
     }
 
     public async getFirstResultTitle(): Promise<string> {
         const title = await this.page.$eval(
-            '(//div[contains(@class, "s-result-item")]//h2//span)[1]',
+            this.firstResultTitleSelector,
             el => el.textContent?.trim() || ''
         );
         console.log('First result title:', title);
@@ -21,17 +26,11 @@ export class SearchResultsPage {
     }
 
     public async clickFirstResult(): Promise<void> {
-        try {
-            await Promise.all([
-                this.page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 10000 }),
-                this.page.click('(//div[contains(@class, "s-result-item")]//a[contains(@class, "a-link-normal")])[1]')
-            ]);
-            await this.page.waitForSelector('#productTitle', { timeout: 10000 });
-        } catch (error) {
-            console.log('Navigation failed. Dumping page content for debugging...');
-            const content = await this.page.content();
-            console.log('Page content snippet:', content.substring(0, 4000));
-            throw error;
-        }
+        await Promise.all([
+            this.page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 10000 }),
+            this.page.click(this.firstResultLinkSelector)
+        ]);
+
+        await this.waitForSelector('#productTitle');
     }
 }

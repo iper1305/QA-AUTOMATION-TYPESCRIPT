@@ -1,12 +1,13 @@
 import { expect } from 'chai';
-import {HomePage} from '../pages/home-page';
-import {getBrowser, getPage, quitBrowser} from '../utils/browser';
-import {SearchResultsPage} from '../pages/search-results-page';
-
+import { Browser, Page } from 'puppeteer';
+import { HomePage } from '../pages/home-page';
+import { SearchResultsPage } from '../pages/search-results-page';
+import { getBrowser, getPage, quitBrowser } from '../utils/browser';
+import { captureScreenshot, capturePageContent } from '../utils/test-utils';
 
 describe('SearchResultsPage Tests', function () {
-    let browser: import('puppeteer').Browser;
-    let page: import('puppeteer').Page;
+    let browser: Browser;
+    let page: Page;
     let homePage: HomePage;
     let searchResultsPage: SearchResultsPage;
 
@@ -21,6 +22,13 @@ describe('SearchResultsPage Tests', function () {
 
     after(async () => {
         await quitBrowser(browser);
+    });
+
+    afterEach(async function() {
+        if (this.currentTest?.state === 'failed') {
+            await captureScreenshot(page, this.currentTest.title);
+            await capturePageContent(page, this.currentTest.title);
+        }
     });
 
     it('should display results for "TypeScript books"', async () => {
@@ -41,8 +49,7 @@ describe('SearchResultsPage Tests', function () {
         await homePage.clickSearchButton();
         await searchResultsPage.clickFirstResult();
 
-        const currentUrl = await page.url();
-        console.log('Current URL after clicking:', currentUrl);
+        const currentUrl = await searchResultsPage.getCurrentUrl();
         expect(currentUrl).to.include('/dp/', 'URL should point to a product page');
     });
 });
