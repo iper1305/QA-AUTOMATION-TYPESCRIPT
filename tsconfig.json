@@ -16,6 +16,7 @@
     "esModuleInterop": true,                             /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */
     "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
     "moduleResolution": "node",
+    "types": ["node", "puppeteer"],
     "experimentalDecorators": true,
 
     /* Type Checking */
@@ -26,5 +27,6 @@
       "node_modules/@types"
     ]
   },
-  "include": ["src/**/*.ts", "tests/**/*.ts"]
+  "include": ["src/**/*.ts"], // Adjust to match your file structure
+  "exclude": ["node_modules"]
 }
