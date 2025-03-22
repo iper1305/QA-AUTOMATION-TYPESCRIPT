@@ -4,7 +4,7 @@ import {BaseStringInstrument} from '../homework_9/base-classes/base-string-instr
 import {Guitar} from '../homework_9/instruments/guitar';
 import {Drums} from '../homework_9/instruments/drums';
 import {Violin} from '../homework_9/instruments/violin';
-import {prepareForConcert} from '../homework_9/index';
+import {prepareForConcert} from '../homework_9';
 
 describe('prepareForConcert function', () => {
     let consoleOutput: string[] = [];
