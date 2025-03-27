@@ -1,0 +1,126 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: GitHub Login Tests >> Login with invalid credentials
+- Location: /Users/irynaperepada/WebstormProjects/QA_AUTOMATION/src/homework_18/tests/login-page.spec.ts:8:9
+
+# Error details
+
+```
+Error: expect(received).toBeFalsy()
+
+Received: true
+    at /Users/irynaperepada/WebstormProjects/QA_AUTOMATION/src/homework_18/tests/login-page.spec.ts:25:32
+    at /Users/irynaperepada/WebstormProjects/QA_AUTOMATION/src/homework_18/tests/login-page.spec.ts:20:9
+```
+
+# Page snapshot
+
+```yaml
+- link "Skip to content"
+- banner:
+  - link "Homepage"
+- main:
+  - heading "Sign in to GitHub" [level=1]
+  - text: Username or email address
+  - textbox "Username or email address": invalid_username
+  - text: Password
+  - textbox "Password" [disabled]
+  - button "Sign in with your identity provider"
+  - heading "Password login alternatives" [level=2]
+  - paragraph:
+    - text: New to GitHub?
+    - link "Create an account"
+- contentinfo:
+  - list:
+    - listitem:
+      - link "Terms"
+    - listitem:
+      - link "Privacy"
+    - listitem:
+      - link "Docs"
+    - listitem:
+      - link "Contact GitHub Support"
+    - listitem:
+      - button "Manage cookies"
+    - listitem:
+      - button "Do not share my personal information"
+- alert:
+  - img
+  - paragraph:
+    - text: We use optional cookies to improve your experience on our websites and to display personalized advertising based on your online activity. If you reject optional cookies, only cookies necessary to provide you the services listed above will be used. You may change your selection on which cookies to accept by clicking "Manage Cookies" at the bottom of the page to change your selection. This selection is maintained for 180 days. Please review your selections regularly.
+    - link "How to manage cookie preferences"
+    - text: "|"
+    - link "Privacy Statement"
+    - text: "|"
+    - link "Third-Party Cookies"
+    - text: .
+  - button "Accept"
+  - button "Reject"
+  - button "Manage cookies"
+```
+
+# Test source
+
+```ts
+   1 | import { test, expect } from '@playwright/test';
+   2 |
+   3 | test.describe('GitHub Login Tests', () => {
+   4 |     test.beforeEach(async ({ page }) => {
+   5 |         await page.goto('https://github.com/login');
+   6 |     });
+   7 |
+   8 |     test('Login with invalid credentials', async ({ page }) => {
+   9 |         // Wait for the login form to be fully loaded
+  10 |         await page.waitForSelector('form[action="/session"]', { state: 'visible' });
+  11 |
+  12 |         // Interact with username field
+  13 |         const usernameInput = page.getByLabel('Username or email address');
+  14 |         await usernameInput.fill('invalid_username');
+  15 |
+  16 |         // Wait for password field to be enabled
+  17 |         const passwordInput = page.getByLabel('Password');
+  18 |
+  19 |         // Add explicit wait and checks
+  20 |         await test.step('Wait for password field to be enabled', async () => {
+  21 |             await passwordInput.waitFor({ state: 'visible' });
+  22 |
+  23 |             // Additional check to ensure the field is not disabled
+  24 |             const isDisabled = await passwordInput.isDisabled();
+> 25 |             expect(isDisabled).toBeFalsy();
+     |                                ^ Error: expect(received).toBeFalsy()
+  26 |         });
+  27 |
+  28 |         // Fill password
+  29 |         await passwordInput.fill('invalid_password');
+  30 |
+  31 |         // Click sign in button
+  32 |         const signInButton = page.getByRole('button', { name: 'Sign in' });
+  33 |         await signInButton.click();
+  34 |
+  35 |         // Verify error message
+  36 |         const errorMessage = page.locator('#js-flash-container');
+  37 |         await expect(errorMessage).toBeVisible();
+  38 |         await expect(errorMessage).toContainText(/Incorrect username or password/);
+  39 |     });
+  40 |
+  41 |     test('Verify login page elements', async ({ page }) => {
+  42 |         // Check page title
+  43 |         await expect(page).toHaveTitle(/Sign in to GitHub/);
+  44 |
+  45 |         // Verify key elements are present
+  46 |         const usernameInput = page.getByLabel('Username or email address');
+  47 |         const passwordInput = page.getByLabel('Password');
+  48 |         const signInButton = page.getByRole('button', { name: 'Sign in' });
+  49 |
+  50 |         await expect(usernameInput).toBeVisible();
+  51 |         await expect(passwordInput).toBeVisible();
+  52 |         await expect(signInButton).toBeVisible();
+  53 |     });
+  54 | });
+```

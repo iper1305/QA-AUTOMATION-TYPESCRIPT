@@ -1,0 +1,97 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: GitHub Login Tests >> Login with invalid credentials
+- Location: /Users/irynaperepada/WebstormProjects/QA_AUTOMATION/src/homework_18/tests/login-page.spec.ts:12:9
+
+# Error details
+
+```
+Error: locator.fill: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for getByLabel('Password')
+    - locator resolved to <input id="password" type="password" name="password" disabled="true" required="required" autocomplete="current-password" class="form-control form-control input-block js-password-field"/>
+    - fill("invalid_password")
+  - attempting fill action
+    2 × waiting for element to be visible, enabled and editable
+      - element is not enabled
+    - retrying fill action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and editable
+      - element is not enabled
+    - retrying fill action
+      - waiting 100ms
+    58 × waiting for element to be visible, enabled and editable
+       - element is not enabled
+     - retrying fill action
+       - waiting 500ms
+
+    at LoginPage.login (/Users/irynaperepada/WebstormProjects/QA_AUTOMATION/src/homework_18/pages/login-page.ts:18:34)
+    at /Users/irynaperepada/WebstormProjects/QA_AUTOMATION/src/homework_18/tests/login-page.spec.ts:13:9
+```
+
+# Page snapshot
+
+```yaml
+- link "Skip to content"
+- banner:
+  - link "Homepage"
+- main:
+  - heading "Sign in to GitHub" [level=1]
+  - text: Username or email address
+  - textbox "Username or email address": invalid_user
+  - text: Password
+  - textbox "Password" [disabled]
+  - button "Sign in with your identity provider"
+  - heading "Password login alternatives" [level=2]
+  - paragraph:
+    - text: New to GitHub?
+    - link "Create an account"
+- contentinfo:
+  - list:
+    - listitem:
+      - link "Terms"
+    - listitem:
+      - link "Privacy"
+    - listitem:
+      - link "Docs"
+    - listitem:
+      - link "Contact GitHub Support"
+    - listitem:
+      - button "Manage cookies"
+    - listitem:
+      - button "Do not share my personal information"
+```
+
+# Test source
+
+```ts
+   1 | import { Page, Locator } from '@playwright/test';
+   2 |
+   3 | export class LoginPage {
+   4 |     public readonly page: Page;
+   5 |     private readonly usernameInput: Locator;
+   6 |     private readonly passwordInput: Locator;
+   7 |     private readonly signInButton: Locator;
+   8 |
+   9 |     public constructor(page: Page) {
+  10 |         this.page = page;
+  11 |         this.usernameInput = page.getByLabel('Username or email address');
+  12 |         this.passwordInput = page.getByLabel('Password');
+  13 |         this.signInButton = page.getByRole('button', { name: 'Sign in' });
+  14 |     }
+  15 |
+  16 |     public async login(username: string, password: string): Promise<void> {
+  17 |         await this.usernameInput.fill(username);
+> 18 |         await this.passwordInput.fill(password);
+     |                                  ^ Error: locator.fill: Test timeout of 30000ms exceeded.
+  19 |         await this.signInButton.click();
+  20 |     }
+  21 | }
+  22 |
+```
