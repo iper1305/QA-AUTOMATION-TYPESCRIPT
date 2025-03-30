@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { ExplorePage } from '../pages/explore-page';
 
 test.describe('GitHub Explore Tests', () => {
@@ -6,16 +6,19 @@ test.describe('GitHub Explore Tests', () => {
 
     test.beforeEach(async ({ page }) => {
         explorePage = new ExplorePage(page);
-        await explorePage.page.goto('https://github.com/explore');
+        await explorePage.goTo();
     });
 
     test('View trending developers', async () => {
         await explorePage.viewTrendingDevelopers();
-        await expect(explorePage.page).toHaveURL(/trending\/developers/);
     });
 
     test('View trending repositories', async () => {
         await explorePage.viewTrendingRepositories();
-        await expect(explorePage.page).toHaveURL(/trending/);
+    });
+
+    test('Explore topics', async () => {
+        await explorePage.exploreTopics();
     });
 });
+

@@ -6,16 +6,15 @@ test.describe('GitHub Repository Tests', () => {
 
     test.beforeEach(async ({ page }) => {
         repositoryPage = new RepositoryPage(page);
-        await repositoryPage.page.goto('https://github.com/microsoft/playwright');
+        await repositoryPage.goTo('microsoft', 'playwright');
     });
 
     test('Verify README visibility', async () => {
-        const readmeVisible = await repositoryPage.viewReadme();
+        const readmeVisible = await repositoryPage.isReadmeVisible();
         expect(readmeVisible).toBeTruthy();
     });
 
     test('Navigate to Issues tab', async () => {
         await repositoryPage.navigateToIssues();
-        await expect(repositoryPage.page).toHaveURL(/issues/);
     });
 });

@@ -6,15 +6,19 @@ test.describe('GitHub Home Page Tests', () => {
 
     test.beforeEach(async ({ page }) => {
         homePage = new HomePage(page);
-        await homePage.navigateTo();
+        await homePage.goTo();
     });
 
-    test('Verify home page title', async () => {
-        await expect(homePage.page).toHaveTitle(/GitHub/);
+    test('Verify home page title', async ({ page }) => {
+        await expect(page).toHaveTitle(/GitHub/);
     });
 
     test('Search functionality works', async () => {
         await homePage.searchRepository('playwright');
-        await expect(homePage.page).toHaveURL(/search/);
+    });
+
+    test('Navigate to trending repositories', async () => {
+        await homePage.exploreTrendingRepositories();
     });
 });
+

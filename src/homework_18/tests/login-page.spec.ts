@@ -6,11 +6,11 @@ test.describe('GitHub Login Tests', () => {
 
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page);
-        await loginPage.page.goto('https://github.com/login');
+        await loginPage.goTo();
     });
 
-    test('Login with invalid credentials', async () => {
+    test('Login with invalid credentials', async ({ page }) => {
         await loginPage.login('invalid_user', 'invalid_password');
-        await expect(loginPage.page).toHaveURL(/session/);
+        await expect(page.getByText('Incorrect username or password.')).toBeVisible();
     });
 });
