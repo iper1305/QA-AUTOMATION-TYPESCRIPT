@@ -7,6 +7,7 @@ test.describe('GitHub Login Tests', () => {
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page);
         await loginPage.goTo();
+        await expect(page.locator('form[action="/session"]')).toBeVisible();
     });
 
     test('Login with invalid credentials', async ({ page }) => {

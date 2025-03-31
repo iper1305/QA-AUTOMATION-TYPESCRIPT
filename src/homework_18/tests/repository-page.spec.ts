@@ -7,6 +7,7 @@ test.describe('GitHub Repository Tests', () => {
     test.beforeEach(async ({ page }) => {
         repositoryPage = new RepositoryPage(page);
         await repositoryPage.goTo('microsoft', 'playwright');
+        await expect(page.locator('.repository-content')).toBeVisible();
     });
 
     test('Verify README visibility', async () => {
@@ -14,7 +15,8 @@ test.describe('GitHub Repository Tests', () => {
         expect(readmeVisible).toBeTruthy();
     });
 
-    test('Navigate to Issues tab', async () => {
+    test('Navigate to Issues tab', async ({ page }) => {
         await repositoryPage.navigateToIssues();
+        await expect(page).toHaveURL(/issues/);
     });
 });
