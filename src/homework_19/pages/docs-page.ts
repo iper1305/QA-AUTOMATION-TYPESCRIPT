@@ -1,7 +1,7 @@
 import { type Locator, type Page } from '@playwright/test';
-import {HeaderComponent} from "../components/header-component";
-import {SidebarComponent} from "../components/sidebar-component";
-import {ArticleComponent} from "../components/article-component";
+import {HeaderComponent} from '../components/header-component';
+import {SidebarComponent} from '../components/sidebar-component';
+import {ArticleComponent} from '../components/article-component';
 
 export class DocsPage {
     public readonly page: Page;
