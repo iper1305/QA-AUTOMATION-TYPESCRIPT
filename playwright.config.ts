@@ -1,7 +1,7 @@
 import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
-    testDir: './src/homework_18/tests',
+    testDir: './src/homework_19/tests',
     reporter: [
         ['list'],
         ['allure-playwright']
