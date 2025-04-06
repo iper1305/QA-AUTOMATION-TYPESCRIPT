@@ -10,7 +10,7 @@ test.describe('Playwright Docs Page - Medium Style POM', () => {
     });
 
     test('should display header logo', async () => {
-        await docsPage.header.isLogoVisible();
+        await docsPage.header.expectLogoToBeVisible();
     });
 
     test('should display the correct article heading', async () => {
@@ -23,12 +23,11 @@ test.describe('Playwright Docs Page - Medium Style POM', () => {
         await docsPage.sidebar.clickLinkByText(linkText);
 
         await expect(page).toHaveURL(/.*writing-tests/);
-        const newArticleHeading = page.locator('article header h1'); // Можна також створити новий ArticleComponent
-        await expect(newArticleHeading).toHaveText(linkText);
+        await docsPage.article.expectedTextIsExist(linkText);
     });
 
     test('should show the installation command in the article', async () => {
-        await docsPage.article.isInstallationCommandVisible();
+        await docsPage.article.expectInstallationCommandIsVisible();
         const commandText = await docsPage.article.getInstallationCommandText();
         expect(commandText).toContain('npm init playwright@latest');
     });

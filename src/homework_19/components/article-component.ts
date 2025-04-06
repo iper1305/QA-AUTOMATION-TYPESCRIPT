@@ -11,6 +11,10 @@ export class ArticleComponent {
         return this.rootLocator.locator('code:has-text("npm init playwright@latest")');
     }
 
+    private get newArticleHeadingLocator(): Locator {
+        return this.rootLocator.locator('article header h1');
+    }
+
     public constructor(locator: Locator) {
         this.rootLocator = locator;
     }
@@ -18,19 +22,23 @@ export class ArticleComponent {
     public async getMainHeadingText(): Promise<string> {
         const text = await this.pageTitleLocator.textContent();
         if (text === null) {
-            throw new Error('Не вдалося отримати текст заголовка статті');
+            throw new Error('Unable to retrieve article title text');
         }
         return text;
     }
 
-    public async isInstallationCommandVisible():Promise<void> {
+    public async expectInstallationCommandIsVisible():Promise<void> {
         await expect(this.installationCommandTextLocator).toBeVisible();
+    }
+
+    public async expectedTextIsExist(text: string):Promise<void> {
+        await expect(this.newArticleHeadingLocator).toHaveText(text);
     }
 
     public async getInstallationCommandText(): Promise<string> {
         const text = await this.installationCommandTextLocator.textContent();
         if (text === null) {
-            throw new Error('Не вдалося отримати текст команди інсталяції');
+            throw new Error('Could not get the text of the installation command');
         }
         return text;
     }
