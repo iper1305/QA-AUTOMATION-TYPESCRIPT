@@ -15,7 +15,7 @@ export class HeaderComponent {
         this.rootLocator = locator;
     }
 
-    public async isLogoVisible():Promise<void> {
+    public async expectLogoToBeVisible():Promise<void> {
         await expect(this.logoLocator).toBeVisible();
     }
 

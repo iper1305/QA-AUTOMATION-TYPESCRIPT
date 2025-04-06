@@ -19,7 +19,7 @@ export class SidebarComponent {
         await this.getLinkByTextLocator(text).click();
     }
 
-    public async isLinkVisible(text: string):Promise<void>  {
+    public async expectLinkIsVisible(text: string):Promise<void>  {
         await expect(this.getLinkByTextLocator(text)).toBeVisible();
     }
 }
